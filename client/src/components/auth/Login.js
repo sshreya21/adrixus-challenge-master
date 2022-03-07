@@ -10,17 +10,20 @@ class Login extends Component {
       errors: "",
     };
   }
+
   onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
+
   onSubmit = async (e) => {
     e.preventDefault();
     const userData = {
       email: this.state.email,
       password: this.state.password,
     };
+
     await axios
-      .post(window.base_url +"/api/users/login", userData)
+      .post(window.base_url + "/api/users/login", userData)
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("token", res.data.token);

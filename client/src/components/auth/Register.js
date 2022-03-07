@@ -27,11 +27,15 @@ class Register extends Component {
     };
 
     console.log(newUser);
-    const response = await axios.post(
-      window.base_url+"/api/users/register",
-      newUser
-    );
-    console.log(response);
+    await axios
+      .post(window.base_url + "/api/users/register", newUser)
+      .then(() => {
+        this.props.history.push("/user");
+      })
+      .catch((errors) => {
+        console.log(errors);
+        alert("Register Failed. Try Again", errors);
+      });
   };
   render() {
     const { errors } = this.state;
